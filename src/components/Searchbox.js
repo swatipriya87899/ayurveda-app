@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
-import { View, StyleSheet,TextInput,Text } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, StyleSheet,TextInput,Text,Image } from 'react-native';
+import  Icon from 'react-native-vector-icons/Ionicons';
 
 const Searchbox = () => {
     const [input, setInput] = React.useState("");
@@ -11,8 +11,8 @@ const Searchbox = () => {
 
   return (
     <View style={styles.searchboxContainer}>
-        <TextInput style={styles.searchbox} placeholder="Search Hospitals..." value={input} onChangeText={onSearch}></TextInput>
-        <Icon name="search" size={25} color="rgba(0, 0, 0, 0.7)" />
+        <TextInput style={styles.searchbox} placeholder="Search Hospitals, Treatments..." value={input} onChangeText={onSearch}></TextInput>
+        <Icon name='ios-search-outline' size={30} color="rgba(0, 0, 0, 0.3)" style={styles.search_icon}/>
     </View>
   )
 }
@@ -26,8 +26,14 @@ const styles = StyleSheet.create({
     searchbox:{
         backgroundColor: "rgba(221, 255, 188, 0.5)",
         textAlign:"center",
-        width:"80%",
+        justifyContent:'center',
+        width:"85%",
         borderRadius: 8,
+    },
+    search_icon:{
+        position:'absolute',
+        right:60,
+        top:6
     }
 })
 

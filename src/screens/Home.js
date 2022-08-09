@@ -1,20 +1,31 @@
-import React from 'react'
-import { View,StyleSheet } from 'react-native'
+import React,{useState} from 'react'
+import { View,StyleSheet, ScrollView } from 'react-native'
 import Card from '../components/Card'
 import Card_Group from '../components/Card_Group'
 import Carousel from '../components/Carousel'
 import Header from '../components/Header'
 import Searchbox from '../components/Searchbox'
+import GetLocationModal from '../components/GetLocationModal'
 
 const Home = () => {
+
+  const [modalVisible,setModalVisible] = useState(false);
+
+  const changeLocationHandler = ()=>{
+    setModalVisible(true)
+  }
+
   return (
     <View style={styles.home}>
-        <Header></Header>
-        <Searchbox></Searchbox>
+        <Header changeLocation={changeLocationHandler}></Header>
+        <ScrollView>
+          <View style={styles.margin}><Searchbox></Searchbox></View>
         <Carousel></Carousel>
-        <View style={[styles.card_group, {paddingBottom:320}]}>
+        <View style={[styles.card_group, {paddingBottom:150}]}>
         <Card_Group/>
         </View>
+        </ScrollView>
+        <GetLocationModal visibility={modalVisible}></GetLocationModal>
     </View>
   )
 }
@@ -22,6 +33,9 @@ const Home = () => {
 const styles = StyleSheet.create({
   card_group:{
     alignItems:'center'
+  },
+  margin:{
+    marginTop:20
   }
   
 })
