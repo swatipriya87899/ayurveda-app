@@ -11,16 +11,33 @@ const Home = () => {
 
   const [modalVisible,setModalVisible] = useState(false);
 
+  //Change Location Modal
   const changeLocationHandler = ()=>{
     setModalVisible(true)
   }
+
+  //Carousel Image Of Home Page
+  const carouselImages = [
+    {
+      image:require('./../assests/images/Carousel1.png'),
+      desc: 'Silent Waters in the mountains in midst of Himilayas',
+     },
+    {
+      image:require('./../assests/images/Carousel2.png'),
+      desc: 'Silent Waters in the mountains in midst of Himilayas',
+     },
+   {
+    image:require('./../assests/images/Carousel1.png'),
+    desc: 'Silent Waters in the mountains in midst of Himilayas',
+   },
+   ]
 
   return (
     <View style={styles.home}>
         <Header changeLocation={changeLocationHandler}></Header>
         <ScrollView>
           <View style={styles.margin}><Searchbox></Searchbox></View>
-        <Carousel></Carousel>
+        <Carousel image={carouselImages} component={<Preview/>} width={300}></Carousel>
         <View style={[styles.card_group, {paddingBottom:150}]}>
         <Card_Group/>
         </View>

@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, StyleSheet, Image, Text, TouchableOpacity, Button} from 'react-native';
+import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
+import Button from './Button';
 
 
 const Card = () => {
@@ -34,9 +35,10 @@ const Card = () => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.card_button}>
-        <Text style={styles.button_text}>View Details</Text>
-      </TouchableOpacity>
+      {/* <TouchableOpacity style={styles.card_button}>
+        <Text style={styles.button_text} onPress={() => navigation.navigate('details')}>View Details</Text>
+      </TouchableOpacity> */}
+      <Button title="View Details" button_style={{width: "80%"}} navigation_link="details"></Button>
     </View>
   );
 };

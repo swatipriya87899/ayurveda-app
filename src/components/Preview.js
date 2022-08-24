@@ -9,13 +9,15 @@ import {
 export default (Preview = ({
   item,
   imageKey,
+  container,
+  preview
 }) => {
   return (
     <View
-      style={[styles.videoContainer]}>
+      style={[styles.videoContainer, container]}>
       <View style={[styles.imageContainer, styles.shadow]}>
         <Image
-          style={[styles.videoPreview]}
+          style={[styles.videoPreview, preview]}
           source={item[imageKey]}
         />
       </View>

@@ -3,30 +3,16 @@ import { View,Text } from 'react-native';
 import {FlatListSlider} from 'react-native-flatlist-slider';
 import Preview from './Preview';
 
-const Carousel = () => {
+const Carousel = (props) => {
 
-  const images = [
-    {
-      image:require('./../assests/images/Carousel1.png'),
-      desc: 'Silent Waters in the mountains in midst of Himilayas',
-     },
-    {
-      image:require('./../assests/images/Carousel2.png'),
-      desc: 'Silent Waters in the mountains in midst of Himilayas',
-     },
-   {
-    image:require('./../assests/images/Carousel1.png'),
-    desc: 'Silent Waters in the mountains in midst of Himilayas',
-   },
-   ]
 
   return (
     <FlatListSlider 
-    data={images}
-    width={300}
+    data={props.image}
+    width={props.width}
     timer={2000}
     indicatorContainerStyle={{position:'absolute', bottom: 40}}
-    component={<Preview />}
+    component={props.component}
     indicatorActiveColor={'#21C974'}
     indicatorInActiveColor={'#ffffff'}
     indicatorActiveWidth={30}
