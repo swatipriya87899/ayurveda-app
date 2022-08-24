@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Nav from 'react-native-vector-icons/Fontisto';
 
@@ -13,13 +13,13 @@ const Header = (props) => {
       </View>
 
       {/* location */}
-      <View style={{alignItems: 'center'}}>
+      <TouchableOpacity style={{alignItems: 'center'}} onPress={props.changeLocation}>
         <View style={styles.location_box}>
           <Icon name="map-marker" size={20} color="#064635" />
           <Text style={styles.location}>Kharari</Text>
         </View>
-        <Text onPress={props.changeLocation} style={styles.change_location}>Change Location</Text>
-      </View>
+        <Text style={styles.change_location}>Change Location</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   change_location: {
     color: '#064635',
     fontWeight: '700',
-    fontSize: 14,
+    fontSize: 12,
   },
 });
 

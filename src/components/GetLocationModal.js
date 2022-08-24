@@ -5,7 +5,7 @@ import {
   Button,
   StyleSheet,
   TouchableOpacity,
-  Image
+  KeyboardAvoidingView
 } from 'react-native';
 import Cross from 'react-native-vector-icons/Entypo';
 import GPS from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -27,10 +27,14 @@ const GetLocationModal = (props) => {
   }
 
   return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{flex:1}}
+    >
       <Modal isVisible={props.visibility}>
         <View style={styles.container}>
           {/* Icon */}
-         <Cross name="cross" width={50} color="#fff"></Cross>
+         <Cross name="cross" size={25} color="#fff"></Cross>
           {/* Title Text */}
           <View>
             <Text style={styles.title} >Search for Nearby Hospitals</Text>
@@ -89,7 +93,7 @@ const GetLocationModal = (props) => {
             justifyContent:"center"
           }}>
             <View>
-              <GPS name="crosshairs-gps" width={30} color="#fff"></GPS>
+              <GPS name="crosshairs-gps" size={25} color="#fff"></GPS>
             </View>
             <View>
               <Text style={{ color: "#FFFFFF", fontWeight: "700" }}>Get Current Location</Text>
@@ -98,6 +102,7 @@ const GetLocationModal = (props) => {
           </TouchableOpacity> : ""}
         </View>
       </Modal>
+      </KeyboardAvoidingView>
   )
 }
 
