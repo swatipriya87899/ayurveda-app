@@ -34,7 +34,7 @@ const GetLocationModal = (props) => {
       <Modal isVisible={props.visibility}>
         <View style={styles.container}>
           {/* Icon */}
-         <Cross name="cross" size={25} color="#fff"></Cross>
+         <Cross onPress={()=>{props.closeModal()}} name="cross" size={25} color="#fff"></Cross>
           {/* Title Text */}
           <View>
             <Text style={styles.title} >Search for Nearby Hospitals</Text>

@@ -15,6 +15,11 @@ const Home = () => {
     setModalVisible(true);
   };
 
+  //function to set modalVisible false
+  const closeTheModal=()=>{
+    setModalVisible(false);
+  }
+
   //Carousel Image Of Home Page
   const carouselImages = [
     {
@@ -46,7 +51,7 @@ const Home = () => {
           <Card_Group />
         </View>
       </ScrollView>
-      <GetLocationModal visibility={modalVisible} ></GetLocationModal>
+      <GetLocationModal closeModal={closeTheModal} visibility={modalVisible} ></GetLocationModal>
     </View>
   );
 };
