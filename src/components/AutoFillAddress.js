@@ -17,7 +17,8 @@ const GooglePlacesInput = (props) => {
       }}
       onPress={(data, details) =>{
         props.show()
-        console.log(data, details);
+        console.log(data, "data");
+        console.log(details,"details");
       }}
 
       currentLocation={true}

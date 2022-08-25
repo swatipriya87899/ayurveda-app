@@ -5,7 +5,7 @@ import {
   Button,
   StyleSheet,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from 'react-native';
 import Cross from 'react-native-vector-icons/Entypo';
 import GPS from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -27,14 +27,11 @@ const GetLocationModal = (props) => {
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{flex:1}}
-    >
+    <KeyboardAvoidingView>
       <Modal isVisible={props.visibility}>
         <View style={styles.container}>
           {/* Icon */}
-         <Cross onPress={()=>{props.closeModal()}} name="cross" size={25} color="#fff"></Cross>
+         <View style={{marginTop: 10, marginRight:10}}><Cross onPress={()=>{props.closeModal()}} name="cross" size={25} color="#fff" style={{textAlign:'right'}}></Cross></View>
           {/* Title Text */}
           <View>
             <Text style={styles.title} >Search for Nearby Hospitals</Text>
@@ -116,21 +113,26 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     color: "#FFFFFF",
-    marginTop: "20%",
+    marginTop: 40,
     fontWeight:"700"
   },
   button: {
-    backgroundColor: "#F9D026",
-    width: "100%",
-    height: "180%",
     justifyContent:"center",
-    borderRadius:3
+    alignItems: "center",
+    borderRadius:3,
+    marginTop: 10,
+    width: "100%"
   },
   buttonText: {
+    paddingTop:10,
+    width: "100%",
+    height: 45,
     color: "#064635",
     textAlign: "center",
     fontSize:16,
-    fontWeight:"400"
+    fontWeight:"400",
+    backgroundColor: "#F9D026",
+    borderRadius:5
   }
 })
 
