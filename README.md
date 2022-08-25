@@ -1,5 +1,4 @@
-Map
-Get Current Location - https://www.npmjs.com/package/react-native-geolocation-service
+Updates:
 
+Installed 1: npm i react-native-get-location
 
-React Native Rating - https://www.npmjs.com/package/react-native-ratings

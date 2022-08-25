@@ -1,44 +1,38 @@
 import React from 'react';
-import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Button from './Button';
 
 
-const Card = () => {
+const Card = (props) => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.card}>
       {/* Image of the Hospital */}
       <View style={styles.card_image_box}>
-        <Image
-          source={require('./../assests/images/ayush_hospital.png')}
-          style={styles.card_image}
-          resizeMode="stretch"></Image>
+      <Image source={{uri : props.image}} style={[styles.card_image, {width:"100%", height:"100%"}]}/>
       </View>
 
       {/* Name of the Hospital */}
-      <Text style={[styles.card_title, styles.font_style]}>title</Text>
+      <Text style={[styles.card_title, styles.font_style]}>{props.name}</Text>
 
       {/* Hospital City Name */}
-      <Text style={[styles.card_subtitle, styles.font_style]}>Sasaram</Text>
+      <Text style={[styles.card_subtitle, styles.font_style]}>{props.city}</Text>
 
       <View style={styles.card_details}>
         <View>
-          <Text style={[styles.font_style]}>Closed</Text>
-          <Text style={[styles.font_style]}>0.6 Km From Here</Text>
+          <Text style={[styles.font_style]}>{props.status}</Text>
+          <Text style={[styles.font_style]}>{props.distance} KM From Here</Text>
         </View>
         <View>
-         <TouchableOpacity onPress={() => navigation.navigate('map')}><Icon name="globe" size={25} color="#26e07f" /></TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('map')}><Icon name="globe" size={25} color="#26e07f" /></TouchableOpacity>
           <Icon name="phone" size={25} color="#26e07f" />
         </View>
       </View>
 
-      {/* <TouchableOpacity style={styles.card_button}>
-        <Text style={styles.button_text} onPress={() => navigation.navigate('details')}>View Details</Text>
-      </TouchableOpacity> */}
-      <Button title="View Details" button_style={{width: "80%"}} navigation_link="details"></Button>
+      <Button title="View Details" button_style={{ width: "80%" }} navigation_link="details"></Button>
     </View>
   );
 };
@@ -46,7 +40,8 @@ const Card = () => {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#064635',
-    margin: 10,
+    margin: 1,
+    marginBottom:20,
     borderRadius: 7,
     padding: 5,
     flex: 1,
@@ -64,6 +59,7 @@ const styles = StyleSheet.create({
   },
   card_image_box: {
     width: '100%',
+    height: 150,
     alignItems: 'center',
   },
   card_subtitle: {
