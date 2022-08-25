@@ -16,7 +16,7 @@ const Header = (props) => {
       <TouchableOpacity style={{alignItems: 'center'}} onPress={props.changeLocation}>
         <View style={styles.location_box}>
           <Icon name="map-marker" size={20} color="#064635" />
-          <Text style={styles.location}>Kharari</Text>
+          <Text style={styles.location}>Perambavoor</Text>
         </View>
         <Text style={styles.change_location}>Change Location</Text>
       </TouchableOpacity>

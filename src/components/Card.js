@@ -32,7 +32,7 @@ const Card = (props) => {
         </View>
       </View>
 
-      <Button title="View Details" button_style={{ width: "80%" }} navigation_link="details"></Button>
+      <Button title="View Details" button_style={{ width: "80%" }} navigation_link="details" id={props.id}></Button>
     </View>
   );
 };

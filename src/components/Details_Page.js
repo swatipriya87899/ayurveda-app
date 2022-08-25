@@ -1,5 +1,5 @@
-import React from 'react';
-import {Text, View, StyleSheet, FlatList, ScrollView} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, FlatList, ScrollView } from 'react-native';
 import Carousel from './Carousel';
 import Doctor from 'react-native-vector-icons/Fontisto';
 import Bed from 'react-native-vector-icons/FontAwesome';
@@ -13,8 +13,22 @@ import Globe from 'react-native-vector-icons/FontAwesome5';
 import Share from 'react-native-vector-icons/Entypo';
 import Button from './Button';
 import Review from './Review';
+import config from './../../config';
 
-const Details_Page = () => {
+const Details_Page = ({ route }) => {
+
+  const [id] = useState(route.params.id);
+
+  const [hospitalsData, setHospitalsData] = useState();
+
+  useEffect(() => {
+    fetch(`${config.Base_API_URL}/hospital/details/${id}`).then((response) => response.json()).then(
+      (data) => {
+        setHospitalsData(data);
+      }
+    )
+  }, [])
+
   //Carousel Image Of Home Page
   const carouselImages = [
     {
@@ -80,88 +94,91 @@ const Details_Page = () => {
   ];
 
   //Rendering Hospital Info Using FlatList
-  const renderHospitalInfo = ({item}) => (
-    <View style={{marginLeft: 15, marginVertical: 30}}>
+  const renderHospitalInfo = ({ item }) => (
+    <View style={{ marginLeft: 15, marginVertical: 30 }}>
       <item.component name={item.name} size={30} color="#FFFFFF" />
-      <Text style={{width: 100, color: 'white'}}>{item.desc}</Text>
+      <Text style={{ width: 100, color: 'white' }}>{item.desc}</Text>
     </View>
   );
 
   //Rendering Hospital Contact Using FlatList
-  const renderHospitalContact = ({item}) => (
-    <View style={{marginLeft: 10, marginVertical: 30}}>
-        <item.component name={item.name} size={30} color="#FFFFFF" />
-        <Text style={{width: 100, color: 'white'}}>{item.desc}</Text>
+  const renderHospitalContact = ({ item }) => (
+    <View style={{ marginLeft: 10, marginVertical: 30 }}>
+      <item.component name={item.name} size={30} color="#FFFFFF" />
+      <Text style={{ width: 100, color: 'white' }}>{item.desc}</Text>
     </View>
   );
 
   return (
-    <ScrollView>
-      {/* Hospital Carousel */}
-      <Carousel
-        image={carouselImages}
-        component={
-          <Preview
-            container={{marginRight: 0, marginLeft: 0}}
-            preview={{borderRadius: 0, height: 222}}
-          />
-        }
-        width={500}></Carousel>
+    <View>
+      {hospitalsData &&
+        <ScrollView>
+          {/* Hospital Carousel */}
+          <Carousel
+            image={carouselImages}
+            component={
+              <Preview
+                container={{ marginRight: 0, marginLeft: 0 }}
+                preview={{ borderRadius: 0, height: 222 }}
+              />
+            }
+            width={500}></Carousel>
 
-      {/* Hospital Details */}
-      <View style={[styles.hospital_details]}>
-        <Text style={[styles.hospitals_name, styles.text_style]}>
-          AyurVaid Hospital, Sasaram
-        </Text>
-        <Text style={[styles.hospital_address, styles.text_style]}>
-          Lokhwandi Road, Railway Station, Sasaram - 821111 Bihar, India
-        </Text>
+          {/* Hospital Details */}
+          <View style={[styles.hospital_details]}>
+            <Text style={[styles.hospitals_name, styles.text_style]}>
+              {hospitalsData.hospitalName}
+            </Text>
+            <Text style={[styles.hospital_address, styles.text_style]}>
+              {hospitalsData.contactInfo.address.addressLine1} {hospitalsData.contactInfo.address.street} {hospitalsData.contactInfo.address.city} {hospitalsData.contactInfo.address.state} {hospitalsData.contactInfo.address.country}
+            </Text>
 
-        {/* Displaying Hospital Info i.e available doctor, vacent beds etc. */}
-        <FlatList
-          horizontal
-          data={hospitalInfo}
-          renderItem={renderHospitalInfo}
-          keyExtractor={item => item.name}
-        />
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Button
-            title="Open now"
-            button_style={{
-              backgroundColor: '#FFFFFF',
-              color: '#1D9B0A',
-              marginLeft: 10,
-            }}></Button>
-          <Text style={[styles.text_style, {marginLeft: 10}]}>
-            6:30am – 10:30pm (Today)
-          </Text>
-          <Info
-            name="info"
-            size={20}
-            color="#FFFFFF"
-            style={{marginLeft: 10}}></Info>
-        </View>
+            {/* Displaying Hospital Info i.e available doctor, vacent beds etc. */}
+            <FlatList
+              horizontal
+              data={hospitalInfo}
+              renderItem={renderHospitalInfo}
+              keyExtractor={item => item.name}
+            />
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Button
+                title="Open now"
+                button_style={{
+                  backgroundColor: '#FFFFFF',
+                  color: '#1D9B0A',
+                  marginLeft: 10,
+                }}></Button>
+              <Text style={[styles.text_style, { marginLeft: 10 }]}>
+                6:30am – 10:30pm (Today)
+              </Text>
+              <Info
+                name="info"
+                size={20}
+                color="#FFFFFF"
+                style={{ marginLeft: 10 }}></Info>
+            </View>
 
-        {/* Displaying Hospital Contact i.e call, map, website etc. */}
-        <FlatList
-          horizontal
-          data={hospitalContact}
-          renderItem={renderHospitalContact}
-          keyExtractor={item => item.name}
-        />
+            {/* Displaying Hospital Contact i.e call, map, website etc. */}
+            <FlatList
+              horizontal
+              data={hospitalContact}
+              renderItem={renderHospitalContact}
+              keyExtractor={item => item.name}
+            />
 
-        <Button title="Book Appointment"
-            button_style={{
-              backgroundColor: '#F9D026',
-              color: '#074E95',
-              marginLeft: 10,
-              width:"80%"
-            }}></Button>
-      </View>
+            <Button title="Book Appointment"
+              button_style={{
+                backgroundColor: '#F9D026',
+                color: '#074E95',
+                marginLeft: 10,
+                width: "80%"
+              }}></Button>
+          </View>
 
-      {/* Review Section */}
-      <Review></Review>
-    </ScrollView>
+          {/* Review Section */}
+          <Review></Review>
+        </ScrollView>}
+    </View>
   );
 };
 
