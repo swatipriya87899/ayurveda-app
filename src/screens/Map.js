@@ -8,8 +8,11 @@ import MapDetails from '../components/MapDetails';
 import { locationPermission } from '../components/MapHelperFunction';
 import TrackLocation from '../components/TrackLocation';
 
-const Map = () => {
+const Map = ({route}) => {
 
+  // Latitude and Longitude for maps
+  const [lat] = useState(route.params.lat);
+  const [long] = useState(route.params.long);
 
   // Distance and Time Value
   const [travel_details, setTravel_details] = useState({
@@ -25,7 +28,7 @@ const Map = () => {
 
   return (
     <View style={{flex: 1}}>
-      <TrackLocation fetchDetails={fetchDetails}/>
+      <TrackLocation fetchDetails={fetchDetails} lat={lat} long={long}/>
       <MapDetails details={travel_details}></MapDetails>
     </View>
 

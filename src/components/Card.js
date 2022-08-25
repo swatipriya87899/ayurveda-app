@@ -27,7 +27,7 @@ const Card = (props) => {
           <Text style={[styles.font_style]}>{props.distance} KM From Here</Text>
         </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('map')}><Icon name="globe" size={25} color="#26e07f" /></TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('map', {lat:props.latitude, long: props.longitude})}><Icon name="globe" size={25} color="#26e07f" /></TouchableOpacity>
           <Icon name="phone" size={25} color="#26e07f" />
         </View>
       </View>

@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {Text, View, Button, StyleSheet, Modal} from 'react-native';
+import {Text, View, Button, StyleSheet, Modal, Image} from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import {Marker} from 'react-native-maps';
@@ -8,6 +8,7 @@ import MapDetails from './MapDetails';
 import { locationPermission } from './MapHelperFunction';
 
 const TrackLocation = (props) => {
+  
   //Map Coordinates
   const [map, setMap] = useState({
     pickupCords: {
@@ -17,8 +18,8 @@ const TrackLocation = (props) => {
       longitudeDelta: 0.0421,
     },
     dropLocationCords: {
-      latitude: 30.7333,
-      longitude: 76.7794,
+      latitude: props.lat,
+      longitude: props.long,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     },
@@ -52,7 +53,9 @@ const TrackLocation = (props) => {
             image={require('./../assests/images/pickupMarker.png')}></Marker>
           <Marker
             coordinate={dropLocationCords}
-            image={require('./../assests/images/dropMarker.png')}></Marker>
+            image={require('./../assests/images/dropMarker.png')} style={{width: 126, height: 128}}
+           ></Marker>
+
           <MapViewDirections
             origin={pickupCords}
             destination={dropLocationCords}
